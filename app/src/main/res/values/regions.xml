@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="regions">
+        <item>Акмолинская область</item>
+        <item>Актюбинская область</item>
+        <item>Алматинская область</item>
+        <item>Атырауская область</item>
+        <item>Восточно-Казахстанская область</item>
+        <item>г. Алматы</item>
+        <item>г. Астана</item>
+        <item>Жамбылская область</item>
+        <item>Западно-Казахстанская область</item>
+        <item>Карагандинская область</item>
+        <item>Костанайская область</item>
+        <item>Кызылординская область</item>
+        <item>Мангистауская область</item>
+        <item>Павлодарская область</item>
+        <item>Северо-Казахстанская область</item>
+        <item>Южно-Казахстанская область</item>
+    </string-array>
+
+</resources>
