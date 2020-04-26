@@ -137,7 +137,6 @@ class MainToolbarsViewActivity : BaseActivity(), EmaView<HomeToolbarState, MainT
 
     private fun setupToolbar(viewModel: MainToolbarsViewModel) {
         vm = viewModel
-        ivToolbarTelegram.setOnClickListener { viewModel.onActionTelegramClicked() }
 
         ivToolbarSearch.setOnSearchClickListener(View.OnClickListener {
             viewModel.onActionSearchClick()
@@ -153,7 +152,7 @@ class MainToolbarsViewActivity : BaseActivity(), EmaView<HomeToolbarState, MainT
             when (destination.id == R.id.categoryViewFragment) {
                 //Logo pressed
                 true -> {
-                    ivToolbarLogoOrBack.setImageDrawable(resources.getDrawable(R.mipmap.ic_launcher_pen, null))
+                    ivToolbarLogoOrBack.setImageDrawable(resources.getDrawable(R.drawable.ic_customer_service, null))
                     ivToolbarLogoOrBack.setOnClickListener { }
                 }
                 //Back pressed
@@ -197,14 +196,6 @@ class MainToolbarsViewActivity : BaseActivity(), EmaView<HomeToolbarState, MainT
             } else {
                 hideToolbar()
                 constraintToolbar.visibility = View.GONE
-            }
-        }
-
-        data.telegramButton?.let { telegramButton ->
-            if (telegramButton.visibility) {
-                ivToolbarTelegram.visibility = View.VISIBLE
-            } else {
-                ivToolbarTelegram.visibility = View.GONE
             }
         }
 

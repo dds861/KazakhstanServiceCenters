@@ -69,24 +69,24 @@ class SearchViewModel(
             val listMakalModels: MutableList<MakalModel> = mutableListOf()
 
             list.map { makalModel ->
-                makalModel.branch.toLowerCase(Locale.ROOT)
-                        .replace("\n", " ")
-                        .replace(",", "")
-                        .replace(".", "")
-                        .replace(" - ", "")
-                        .replace("- ", "")
-                        .replace(" -", "")
-                        .split(" ")
-                        .filter { s -> s.contains(queryText) }
-                        .map { MakalModel(branch = it, address =makalModel.address, phone = makalModel.phone, schedule =makalModel.schedule) }
+                makalModel.address?.toLowerCase(Locale.ROOT)
+                        ?.replace("\n", " ")
+                        ?.replace(",", "")
+                        ?.replace(".", "")
+                        ?.replace(" - ", "")
+                        ?.replace("- ", "")
+                        ?.replace(" -", "")
+                        ?.split(" ")
+                        ?.filter { s -> s.contains(queryText) }
+                        ?.map { MakalModel(branch = makalModel.branch, address = makalModel.address, phone = makalModel.phone, schedule = makalModel.schedule) }
             }.map { listMakals ->
-                listMakals.map {
+                listMakals?.map {
                     listMakalModels.add(it)
                 }
             }
             return listMakalModels.distinct()
-                    .sortedByDescending { it.branch }
-                    .sortedBy { it.branch.length }
+                    .sortedByDescending { it.address }
+                    .sortedBy { it.address?.length }
         } else {
             return listOf()
         }
@@ -97,23 +97,23 @@ class SearchViewModel(
             val listMakalModels: MutableList<MakalModel> = mutableListOf()
 
             list.map { makalModel ->
-                val indexBeforeQueryText = makalModel.branch.indexOf(queryText)
-                if (indexBeforeQueryText < 0 || (indexBeforeQueryText >= 0 && makalModel.branch[indexBeforeQueryText - 1] == ' ')) {
-                    listMakalModels.add(makalModel)
+                val indexBeforeQueryText = makalModel.address?.indexOf(queryText)
+                val address = indexBeforeQueryText?.minus(1)?.let { makalModel.address?.get(it) }
+                if (indexBeforeQueryText != null) {
+                    if (indexBeforeQueryText < 0 || (indexBeforeQueryText >= 0 && address == ' ')) {
+                        listMakalModels.add(makalModel)
+                    }
                 }
             }
             listMakalModels.distinct()
-                    .sortedByDescending { it.branch }
-                    .sortedBy { it.branch.length }
+                    .sortedByDescending { it.address }
+                    .sortedBy { it.address?.length }
         } else {
             listOf()
         }
     }
 
     private fun onActionFilterToolbarHintsByQueryText(queryText: String) {
-
-
-
         //load results of hints by keyword
         checkDataState {
             executeUseCaseWithException(
@@ -136,7 +136,6 @@ class SearchViewModel(
         mainToolbarsVm.onActionShowInterstitialAd()
         //update text on searchView
         mainToolbarsVm.onActionSearchViewText(queryText)
-
         //load makals to recyclerview
         checkDataState {
             executeUseCaseWithException(
@@ -144,7 +143,8 @@ class SearchViewModel(
                         val responseMakalModel = getLocalMakalByQueryTextUseCase.execute(RequestMakalModel(queryText = queryText))
                         updateToNormalState {
                             copy(
-                                    listMakals = filterToolbarMakalsByQueryText(queryText, responseMakalModel.list),
+//                                    listMakals = filterToolbarMakalsByQueryText(queryText, responseMakalModel.list),
+                                    listMakals = responseMakalModel.list,
                                     adapterType = SearchState.AdapterType.MAKALS
                             )
                         }

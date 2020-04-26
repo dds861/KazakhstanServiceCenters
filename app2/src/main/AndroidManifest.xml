@@ -7,9 +7,9 @@
         android:name="com.dd.conqazaqstan.sqlite.base.MakalApplication"
         android:allowBackup="false"
 
-        android:icon="@mipmap/ic_launcher_pen"
+        android:icon="@drawable/ic_customer_service"
         android:label="@string/application_name"
-        android:roundIcon="@mipmap/ic_launcher_pen"
+        android:roundIcon="@drawable/ic_customer_service"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">

@@ -2,7 +2,7 @@
 
     <!--HOME-->
     <string name="home_loading_title">Loading…</string>
-    <string name="home_toolbar_title">ЦОНы Казахстан</string>
+    <string name="home_toolbar_title">Справочник ЦОНов Казахстана</string>
 
     <!--DIALOG-->
     <string name="dialog_yes">Yes</string>
@@ -10,8 +10,8 @@
     <string name="dialog_no">No</string>
 
 
-    <string name="app_name">ЦОНы Казахстан</string>
-    <string name="application_name">ЦОНы Казахстан</string>
+    <string name="app_name">ЦОНы Справочник</string>
+    <string name="application_name">ЦОНы Справочник</string>
     <string name="hint_search">Поиск</string>
     <!--real banner id-->
         <string name="admob_ad_app_id" translatable="false">ca-app-pub-3941279894802307~1005655294</string>
@@ -27,7 +27,7 @@
     <string name="app_label">label</string>
     <string name="search_hint">Фильтр</string>
     <string name="search_title">Поиск</string>
-    <string name="appwidget_text">ЦОНы Казахстан</string>
+    <string name="appwidget_text">ЦОНы Справочник</string>
     <string name="add_widget">Add widget</string>
 
     <string name="title_activity_main3">Main3Activity</string>

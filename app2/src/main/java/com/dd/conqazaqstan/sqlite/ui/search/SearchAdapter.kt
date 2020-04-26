@@ -30,7 +30,7 @@ class SearchAdapter(private val context: Context,
     override fun View.bind(item: MakalModel, viewType: Int) {
         when (adapterType) {
             SearchState.AdapterType.HINT -> {
-                tvText.text = item.branch
+                tvText.text = item.address
 
                 rootView.setOnClickListener {
                     itemListener.invoke(item)
@@ -38,13 +38,16 @@ class SearchAdapter(private val context: Context,
             }
 
             SearchState.AdapterType.MAKALS -> {
+                tvAddress.text = item.address
                 tvBranch.text = item.branch
+                tvPhone.text = item.phone
+                tvSchedule.text = item.schedule
 
                 ivCopy.setOnClickListener {
                     YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(ivCopy)
                     YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(ivCopy)
 
-                    copyToClipboard(item.branch)
+                    item.address?.let { it1 -> copyToClipboard(it1) }
 
                     itemListener.invoke(item)
                 }
@@ -52,7 +55,7 @@ class SearchAdapter(private val context: Context,
                     YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(ivShare)
                     YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(ivShare)
 
-                    shareText(item.branch)
+                    item.address?.let { it1 -> shareText(it1) }
 
                     itemListener.invoke(item)
                 }

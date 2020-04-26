@@ -59,7 +59,7 @@ class SearchViewFragment
             SearchAdapter(context = requireContext(), listItems = mutableList, adapterType = data.adapterType) { makalModel ->
                 when (data.adapterType) {
                     SearchState.AdapterType.HINT -> {
-                        vm.onActionFilterToolbarMakalsByQueryText(makalModel.branch)
+                        makalModel.address?.let { vm.onActionFilterToolbarMakalsByQueryText(it) }
                         activity?.let { KeyboardUtils.hideKeyboard(it, view) }
                     }
 

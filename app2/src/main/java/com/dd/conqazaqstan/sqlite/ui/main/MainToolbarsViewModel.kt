@@ -54,9 +54,7 @@ class MainToolbarsViewModel : BaseViewModel<HomeToolbarState, HomeNavigator.Navi
         navigate(HomeNavigator.Navigation.Back)
     }
 
-    fun onActionTelegramClicked() {
-        navigate(HomeNavigator.Navigation.Telegram)
-    }
+
 
     fun onActionSearchClick() {
         navigate(HomeNavigator.Navigation.Search)
