@@ -38,7 +38,7 @@ class SearchAdapter(private val context: Context,
             }
 
             SearchState.AdapterType.MAKALS -> {
-                text2.text = item.makal_text
+                textBranch.text = item.makal_text
 
                 ivCopy.setOnClickListener {
                     YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(ivCopy)

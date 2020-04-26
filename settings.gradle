@@ -1,1 +1,1 @@
-include ':app', ':injection', ':domain', ':data', ':app2', ':common'
+include ':injection', ':domain', ':data', ':app2', ':common'

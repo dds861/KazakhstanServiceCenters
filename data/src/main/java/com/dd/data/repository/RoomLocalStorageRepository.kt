@@ -29,7 +29,7 @@ class RoomLocalStorageRepository(
                 context.applicationContext,
                 MakalDatabase::class.java,
                 BuildConfig.DB_NAME)
-        build.createFromAsset("database/makal.db")
+        build.createFromAsset("database/quotes.db")
 //        build.fallbackToDestructiveMigration()
         build.addMigrations(MIGRATION_1_2)
         build.fallbackToDestructiveMigration()

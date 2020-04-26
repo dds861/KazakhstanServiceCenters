@@ -17,10 +17,10 @@ data class CategoryDbData(
     //////////////////////////TABLE///////////////////////////
 
     companion object {
-        const val TABLE_NAME = "catagories"
+        const val TABLE_NAME = "regions"
+        const val CATEGORY_ID = "code"
         const val ID = "id"
-        const val CATEGORY_ID = "category_id"
-        const val CATEGORY_TEXT = "category_text"
+        const val CATEGORY_TEXT = "name"
     }
 
     //////////////////////////////////////////////////////////

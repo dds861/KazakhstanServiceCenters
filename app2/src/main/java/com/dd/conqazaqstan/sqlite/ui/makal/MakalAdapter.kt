@@ -19,7 +19,8 @@ class MakalAdapter(private val context: Context,
     override val layoutItemId: Int = R.layout.item_makal
 
     override fun View.bind(item: MakalModel, viewType: Int) {
-        text2.text = item.makal_text
+        textBranch.text = item.makal_text
+        textBranch.text = item.makal_text
 
         ivCopy.setOnClickListener {
             YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(ivCopy)
