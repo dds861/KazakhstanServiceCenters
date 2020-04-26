@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\dds86\Desktop\AndroidApplications\KazakhstanServiceCenters\AndroidStudioProject.iml" filepath="C:\Users\dds86\Desktop\AndroidApplications\KazakhstanServiceCenters\AndroidStudioProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidProjects-KazakhstanServiceCenters.iml" filepath="$PROJECT_DIR$/AndroidProjects-KazakhstanServiceCenters.iml" group="KazakhstanServiceCenters" />
+      <module fileurl="file://C:/Users/dds86/Desktop/AndroidApplications/KazakhstanServiceCenters/AndroidStudioProject.iml" filepath="C:/Users/dds86/Desktop/AndroidApplications/KazakhstanServiceCenters/AndroidStudioProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/KazakhstanServiceCenters.iml" filepath="$PROJECT_DIR$/.idea/KazakhstanServiceCenters.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/KazakhstanServiceCenters-app.iml" filepath="$PROJECT_DIR$/app/KazakhstanServiceCenters-app.iml" group="KazakhstanServiceCenters/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app2/app2.iml" filepath="$PROJECT_DIR$/app2/app2.iml" group="KazakhstanServiceCenters/app2" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" group="KazakhstanServiceCenters/common" />
+      <module fileurl="file://$PROJECT_DIR$/data/data.iml" filepath="$PROJECT_DIR$/data/data.iml" group="KazakhstanServiceCenters/data" />
+      <module fileurl="file://$PROJECT_DIR$/domain/domain.iml" filepath="$PROJECT_DIR$/domain/domain.iml" group="KazakhstanServiceCenters/domain" />
+      <module fileurl="file://$PROJECT_DIR$/injection/injection.iml" filepath="$PROJECT_DIR$/injection/injection.iml" group="KazakhstanServiceCenters/injection" />
     </modules>
   </component>
 </project>
