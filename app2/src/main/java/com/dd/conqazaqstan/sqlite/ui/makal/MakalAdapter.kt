@@ -19,14 +19,16 @@ class MakalAdapter(private val context: Context,
     override val layoutItemId: Int = R.layout.item_makal
 
     override fun View.bind(item: MakalModel, viewType: Int) {
-        textBranch.text = item.makal_text
-        textBranch.text = item.makal_text
+        tvBranch.text = item.branch
+        tvPhone.text = item.phone
+        tvAddress.text = item.address
+        tvSchedule.text = item.schedule
 
         ivCopy.setOnClickListener {
             YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(ivCopy)
             YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(ivCopy)
 
-            copyToClipboard(item.makal_text)
+            copyToClipboard(item.branch)
 
             itemListener.invoke(item)
         }
@@ -34,7 +36,7 @@ class MakalAdapter(private val context: Context,
             YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(ivShare)
             YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(ivShare)
 
-            shareText(item.makal_text)
+            shareText(item.branch)
 
             itemListener.invoke(item)
         }
@@ -52,6 +54,6 @@ class MakalAdapter(private val context: Context,
         sharingIntent.type = "text/plain"
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, text)
         sharingIntent.putExtra(Intent.EXTRA_TEXT, text)
-       context.startActivity(Intent.createChooser(sharingIntent, context.resources.getString(R.string.share_using)))
+        context.startActivity(Intent.createChooser(sharingIntent, context.resources.getString(R.string.share_using)))
     }
 }

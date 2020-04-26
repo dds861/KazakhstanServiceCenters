@@ -71,7 +71,7 @@ class MakalViewModel(
                         updateToNormalState {
                             copy(
                                     listMakals = responseMakalModel.list.filter {
-                                        it.makal_text
+                                        it.branch
                                                 .toLowerCase(Locale.ROOT)
                                                 .contains(queryText.toLowerCase(Locale.ROOT))
                                     }

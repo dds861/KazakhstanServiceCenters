@@ -69,7 +69,7 @@ class SearchViewModel(
             val listMakalModels: MutableList<MakalModel> = mutableListOf()
 
             list.map { makalModel ->
-                makalModel.makal_text.toLowerCase(Locale.ROOT)
+                makalModel.branch.toLowerCase(Locale.ROOT)
                         .replace("\n", " ")
                         .replace(",", "")
                         .replace(".", "")
@@ -78,15 +78,15 @@ class SearchViewModel(
                         .replace(" -", "")
                         .split(" ")
                         .filter { s -> s.contains(queryText) }
-                        .map { MakalModel(makal_text = it) }
+                        .map { MakalModel(branch = it, address =makalModel.address, phone = makalModel.phone, schedule =makalModel.schedule) }
             }.map { listMakals ->
                 listMakals.map {
                     listMakalModels.add(it)
                 }
             }
             return listMakalModels.distinct()
-                    .sortedByDescending { it.makal_text }
-                    .sortedBy { it.makal_text.length }
+                    .sortedByDescending { it.branch }
+                    .sortedBy { it.branch.length }
         } else {
             return listOf()
         }
@@ -97,14 +97,14 @@ class SearchViewModel(
             val listMakalModels: MutableList<MakalModel> = mutableListOf()
 
             list.map { makalModel ->
-                val indexBeforeQueryText = makalModel.makal_text.indexOf(queryText)
-                if (indexBeforeQueryText < 0 || (indexBeforeQueryText >= 0 && makalModel.makal_text[indexBeforeQueryText - 1] == ' ')) {
+                val indexBeforeQueryText = makalModel.branch.indexOf(queryText)
+                if (indexBeforeQueryText < 0 || (indexBeforeQueryText >= 0 && makalModel.branch[indexBeforeQueryText - 1] == ' ')) {
                     listMakalModels.add(makalModel)
                 }
             }
             listMakalModels.distinct()
-                    .sortedByDescending { it.makal_text }
-                    .sortedBy { it.makal_text.length }
+                    .sortedByDescending { it.branch }
+                    .sortedBy { it.branch.length }
         } else {
             listOf()
         }

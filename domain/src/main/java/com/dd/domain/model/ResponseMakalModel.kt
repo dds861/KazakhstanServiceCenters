@@ -8,11 +8,12 @@ data class ResponseMakalModel(
         val result: String = STRING_EMPTY,
         val randomMakal: String = STRING_EMPTY,
         val list: List<MakalModel> = listOf()
-
 )
-
 
 data class MakalModel(
         val makal_id: Int = INT_ZERO,
-        val makal_text: String = STRING_EMPTY
+        val branch: String = STRING_EMPTY,
+        val address: String? = STRING_EMPTY,
+        val phone: String? = STRING_EMPTY,
+        val schedule: String? = STRING_EMPTY
 ) : EmaModel
