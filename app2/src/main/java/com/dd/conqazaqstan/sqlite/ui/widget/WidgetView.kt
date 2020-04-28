@@ -30,13 +30,11 @@ class WidgetView()
      * Default functions
      */
     override fun onEnabled(context: Context) {
-        Log.i("autolog", "onEnabled: ");
         // Enter relevant functionality for when the first widget is created
         widgetViewModel = WidgetViewModel(context)
     }
 
     override fun onReceive(context: Context, intent: Intent) {
-        Log.i("autolog", "onReceive: ");
         super.onReceive(context, intent)
         widgetViewModel = WidgetViewModel(context)
         CoroutineScope(Dispatchers.Main).launch {
@@ -52,7 +50,6 @@ class WidgetView()
     }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        Log.i("autolog", "onUpdate: ");
         // There may be multiple widgets active, so update all of them
         widgetViewModel = WidgetViewModel(context)
         CoroutineScope(Dispatchers.Main).launch {
@@ -70,14 +67,12 @@ class WidgetView()
      * Custom functions
      */
     private fun getPendingSelfIntent(context: Context?, action: String?): PendingIntent {
-        Log.i("autolog", "getPendingSelfIntent: ");
         val intent = Intent(context, javaClass)
         intent.action = action
         return PendingIntent.getBroadcast(context, 0, intent, 0)
     }
 
     private suspend fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
-        Log.i("autolog", "updateAppWidget: ");
         // Construct the RemoteViews object
         val remoteViews = RemoteViews(context.packageName, R.layout.new_app_widget)
         //setting text to widget TextView

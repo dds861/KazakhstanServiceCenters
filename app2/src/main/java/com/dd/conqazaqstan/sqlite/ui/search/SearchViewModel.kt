@@ -64,55 +64,6 @@ class SearchViewModel(
     /**
      * Custom functions
      */
-    private fun filterToolbarHintsByQueryText(queryText: String, list: List<MakalModel>): List<MakalModel> {
-        if (queryText.isNotEmpty()) {
-            val listMakalModels: MutableList<MakalModel> = mutableListOf()
-
-            list.map { makalModel ->
-                makalModel.address?.toLowerCase(Locale.ROOT)
-                        ?.replace("\n", " ")
-                        ?.replace(",", "")
-                        ?.replace(".", "")
-                        ?.replace(" - ", "")
-                        ?.replace("- ", "")
-                        ?.replace(" -", "")
-                        ?.split(" ")
-                        ?.filter { s -> s.contains(queryText) }
-                        ?.map { MakalModel(branch = makalModel.branch, address = makalModel.address, phone = makalModel.phone, schedule = makalModel.schedule) }
-            }.map { listMakals ->
-                listMakals?.map {
-                    listMakalModels.add(it)
-                }
-            }
-            return listMakalModels.distinct()
-                    .sortedByDescending { it.address }
-                    .sortedBy { it.address?.length }
-        } else {
-            return listOf()
-        }
-    }
-
-    private fun filterToolbarMakalsByQueryText(queryText: String, list: List<MakalModel>): List<MakalModel> {
-        return if (queryText.isNotEmpty()) {
-            val listMakalModels: MutableList<MakalModel> = mutableListOf()
-
-            list.map { makalModel ->
-                val indexBeforeQueryText = makalModel.address?.indexOf(queryText)
-                val address = indexBeforeQueryText?.minus(1)?.let { makalModel.address?.get(it) }
-                if (indexBeforeQueryText != null) {
-                    if (indexBeforeQueryText < 0 || (indexBeforeQueryText >= 0 && address == ' ')) {
-                        listMakalModels.add(makalModel)
-                    }
-                }
-            }
-            listMakalModels.distinct()
-                    .sortedByDescending { it.address }
-                    .sortedBy { it.address?.length }
-        } else {
-            listOf()
-        }
-    }
-
     private fun onActionFilterToolbarHintsByQueryText(queryText: String) {
         //load results of hints by keyword
         checkDataState {
@@ -133,7 +84,7 @@ class SearchViewModel(
     }
 
     fun onActionFilterToolbarMakalsByQueryText(queryText: String) {
-        mainToolbarsVm.onActionShowInterstitialAd()
+//        mainToolbarsVm.onActionShowInterstitialAd()
         //update text on searchView
         mainToolbarsVm.onActionSearchViewText(queryText)
         //load makals to recyclerview
@@ -143,8 +94,8 @@ class SearchViewModel(
                         val responseMakalModel = getLocalMakalByQueryTextUseCase.execute(RequestMakalModel(queryText = queryText))
                         updateToNormalState {
                             copy(
-//                                    listMakals = filterToolbarMakalsByQueryText(queryText, responseMakalModel.list),
-                                    listMakals = responseMakalModel.list,
+                                    listMakals = filterToolbarMakalsByQueryText(queryText, responseMakalModel.list),
+//                                    listMakals = responseMakalModel.list,
                                     adapterType = SearchState.AdapterType.MAKALS
                             )
                         }
@@ -152,6 +103,67 @@ class SearchViewModel(
                     { e ->
                         updateToErrorState(e)
                     })
+        }
+    }
+
+    private fun filterToolbarHintsByQueryText(queryText: String, list: List<MakalModel>): List<MakalModel> {
+        if (queryText.isNotEmpty()) {
+            val listMakalModels: MutableList<MakalModel> = mutableListOf()
+            val branchlist: MutableList<String> = mutableListOf()
+            val phonelist: MutableList<String> = mutableListOf()
+            val schedulelist: MutableList<String> = mutableListOf()
+
+            list.map { makalModel ->
+                makalModel.address?.toLowerCase(Locale.ROOT)
+                        ?.replace("\n", " ")
+                        ?.replace(",", "")
+                        ?.replace(".", "")
+                        ?.replace(" - ", "")
+                        ?.replace("- ", "")
+                        ?.replace(" -", "")
+                        ?.split(" ")
+                        ?.filter { s -> s.contains(queryText) }
+                        ?.map { MakalModel(address = it) }
+            }.map { listMakals ->
+                listMakals?.map {
+                    listMakalModels.add(it)
+                }
+            }
+
+
+
+
+
+            return listMakalModels.distinct()
+                    .sortedByDescending { it.address }
+                    .sortedBy { it.address?.length }
+        } else {
+            return listOf()
+        }
+    }
+
+    private fun filterToolbarMakalsByQueryText(queryText: String, list: List<MakalModel>): List<MakalModel> {
+        return if (queryText.isNotEmpty()) {
+            val listMakalModels: MutableList<MakalModel> = mutableListOf()
+
+            list.map { makalModel ->
+                val addressText = makalModel.address
+                val indexBeforeQueryText = addressText?.toLowerCase()?.indexOf(queryText)
+                val address = indexBeforeQueryText?.minus(1)?.let {
+                    makalModel.address?.get(it)
+                }
+                if (indexBeforeQueryText != null) {
+                    if (indexBeforeQueryText < 0 || (indexBeforeQueryText >= 0 && address == ' ')) {
+                        listMakalModels.add(makalModel)
+                    }
+                }
+            }
+
+            listMakalModels.distinct()
+                    .sortedByDescending { it.address }
+                    .sortedBy { it.address?.length }
+        } else {
+            listOf()
         }
     }
 }

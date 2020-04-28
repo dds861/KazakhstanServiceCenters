@@ -1,12 +1,13 @@
 package com.dd.conqazaqstan.sqlite.ui.search
 
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.carmabs.ema.core.state.EmaExtraData
-import com.dd.data.utils.KeyboardUtils
 import com.dd.conqazaqstan.sqlite.R
 import com.dd.conqazaqstan.sqlite.base.BaseToolbarsFragment
 import com.dd.conqazaqstan.sqlite.ui.main.MainToolbarsViewModel
+import com.dd.data.utils.KeyboardUtils
 import kotlinx.android.synthetic.main.fragment_search.*
 import org.kodein.di.generic.instance
 
