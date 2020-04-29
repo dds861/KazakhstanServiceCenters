@@ -47,7 +47,14 @@ class SearchAdapter(private val context: Context,
                     YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(ivCopy)
                     YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(ivCopy)
 
-                    item.address?.let { it1 -> copyToClipboard(it1) }
+                    copyToClipboard(item.address
+                            + ", "
+                            + item.branch
+                            + ", "
+                            + item.phone
+                            + ", "
+                            + item.schedule
+                    )
 
                     itemListener.invoke(item)
                 }
@@ -55,7 +62,14 @@ class SearchAdapter(private val context: Context,
                     YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(ivShare)
                     YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(ivShare)
 
-                    item.address?.let { it1 -> shareText(it1) }
+                    shareText(item.address
+                            + ", "
+                            + item.branch
+                            + ", "
+                            + item.phone
+                            + ", "
+                            + item.schedule
+                    )
 
                     itemListener.invoke(item)
                 }

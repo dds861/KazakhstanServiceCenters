@@ -4,6 +4,8 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.view.View
 import android.widget.Toast
 import com.carmabs.ema.android.ui.EmaRecyclerAdapter
@@ -24,21 +26,56 @@ class MakalAdapter(private val context: Context,
         tvAddress.text = item.address
         tvSchedule.text = item.schedule
 
+        itemListener.invoke(item)
+
         ivCopy.setOnClickListener {
             YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(ivCopy)
             YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(ivCopy)
 
-            item.address?.let { it1 -> copyToClipboard(it1) }
-
-            itemListener.invoke(item)
+            copyToClipboard(item.address
+                    + ", "
+                    + item.branch
+                    + ", "
+                    + item.phone
+                    + ", "
+                    + item.schedule
+            )
         }
         ivShare.setOnClickListener {
             YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(ivShare)
             YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(ivShare)
 
-            item.address?.let { it1 -> shareText(it1) }
+            shareText("Адрес: ${item.address},\n" +
+                    "Отдел: ${item.branch},\n" +
+                    "Телефон: ${item.phone},\n" +
+                    "График: ${item.schedule}"
+            )
+        }
+        ivWhatsApp.setOnClickListener {
+            YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(ivWhatsApp)
+            YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(ivWhatsApp)
 
-            itemListener.invoke(item)
+            onClickWhatsApp("Адрес: ${item.address},\n" +
+                    "Отдел: ${item.branch},\n" +
+                    "Телефон: ${item.phone},\n" +
+                    "График: ${item.schedule}"
+            )
+        }
+
+        tvPhone.setOnClickListener {
+            YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(tvPhone)
+            YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(tvPhoneText)
+            YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(tvPhone)
+            YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(tvPhoneText)
+            item.phone?.let { it1 -> dialPhone(it1) }
+        }
+
+        tvPhoneText.setOnClickListener {
+            YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(tvPhone)
+            YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(tvPhoneText)
+            YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(tvPhone)
+            YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(tvPhoneText)
+            item.phone?.let { it1 -> dialPhone(it1) }
         }
     }
 
@@ -55,5 +92,28 @@ class MakalAdapter(private val context: Context,
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, text)
         sharingIntent.putExtra(Intent.EXTRA_TEXT, text)
         context.startActivity(Intent.createChooser(sharingIntent, context.resources.getString(R.string.share_using)))
+    }
+
+    private fun dialPhone(text: String) {
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.data = Uri.parse("tel:$text")
+        context.startActivity(intent)
+    }
+
+    fun onClickWhatsApp(text: String) {
+        val pm: PackageManager = context.packageManager
+        try {
+            val waIntent = Intent(Intent.ACTION_SEND)
+            waIntent.type = "text/plain"
+            val info = pm.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA)
+            //Check if package exists or not. If not then code
+            //in catch block will be called
+            waIntent.setPackage("com.whatsapp")
+            waIntent.putExtra(Intent.EXTRA_TEXT, text)
+            context.startActivity(Intent.createChooser(waIntent, "Share with"))
+        } catch (e: PackageManager.NameNotFoundException) {
+            Toast.makeText(context, "WhatsApp not Installed", Toast.LENGTH_SHORT)
+                    .show()
+        }
     }
 }

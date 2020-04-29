@@ -64,9 +64,9 @@ rootProject.ext {
             minSdk                : 21,
             compileSdk            : 29,
             targetSdk             : 29,
-            versionCode           : 12,
+            versionCode           : 5,
             versionName           : "2.3.0",
-            versionNameApplication: "4.0.1"
+            versionNameApplication: "2.1.0"
     ]
 
     appDependencies = [

@@ -84,7 +84,7 @@ class SearchViewModel(
     }
 
     fun onActionFilterToolbarMakalsByQueryText(queryText: String) {
-//        mainToolbarsVm.onActionShowInterstitialAd()
+        mainToolbarsVm.onActionShowInterstitialAd()
         //update text on searchView
         mainToolbarsVm.onActionSearchViewText(queryText)
         //load makals to recyclerview
@@ -109,9 +109,6 @@ class SearchViewModel(
     private fun filterToolbarHintsByQueryText(queryText: String, list: List<MakalModel>): List<MakalModel> {
         if (queryText.isNotEmpty()) {
             val listMakalModels: MutableList<MakalModel> = mutableListOf()
-            val branchlist: MutableList<String> = mutableListOf()
-            val phonelist: MutableList<String> = mutableListOf()
-            val schedulelist: MutableList<String> = mutableListOf()
 
             list.map { makalModel ->
                 makalModel.address?.toLowerCase(Locale.ROOT)
@@ -129,10 +126,6 @@ class SearchViewModel(
                     listMakalModels.add(it)
                 }
             }
-
-
-
-
 
             return listMakalModels.distinct()
                     .sortedByDescending { it.address }
