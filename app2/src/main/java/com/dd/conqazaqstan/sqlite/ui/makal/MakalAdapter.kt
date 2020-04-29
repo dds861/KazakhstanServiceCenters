@@ -32,13 +32,10 @@ class MakalAdapter(private val context: Context,
             YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(ivCopy)
             YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(ivCopy)
 
-            copyToClipboard(item.address
-                    + ", "
-                    + item.branch
-                    + ", "
-                    + item.phone
-                    + ", "
-                    + item.schedule
+            copyToClipboard("Адрес: ${item.address},\n" +
+                    "Отдел: ${item.branch},\n" +
+                    "Телефон: ${item.phone},\n" +
+                    "График: ${item.schedule}"
             )
         }
         ivShare.setOnClickListener {
@@ -77,6 +74,12 @@ class MakalAdapter(private val context: Context,
             YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(tvPhoneText)
             item.phone?.let { it1 -> dialPhone(it1) }
         }
+
+        ivLocation.setOnClickListener {
+            YoYo.with(Techniques.FadeOut).duration(150).repeat(0).playOn(ivLocation)
+            YoYo.with(Techniques.FadeIn).duration(350).repeat(0).playOn(ivLocation)
+            item.address?.let { it1 -> shareLocation(it1) }
+        }
     }
 
     private fun copyToClipboard(text: String) {
@@ -100,7 +103,7 @@ class MakalAdapter(private val context: Context,
         context.startActivity(intent)
     }
 
-    fun onClickWhatsApp(text: String) {
+    private fun onClickWhatsApp(text: String) {
         val pm: PackageManager = context.packageManager
         try {
             val waIntent = Intent(Intent.ACTION_SEND)
@@ -113,6 +116,17 @@ class MakalAdapter(private val context: Context,
             context.startActivity(Intent.createChooser(waIntent, "Share with"))
         } catch (e: PackageManager.NameNotFoundException) {
             Toast.makeText(context, "WhatsApp not Installed", Toast.LENGTH_SHORT)
+                    .show()
+        }
+    }
+
+    private fun shareLocation(text: String) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.google.com/maps/search/?api=1&query=$text"))
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(context, "Some problems happened", Toast.LENGTH_SHORT)
                     .show()
         }
     }

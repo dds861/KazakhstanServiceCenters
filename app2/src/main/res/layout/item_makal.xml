@@ -24,7 +24,7 @@
             android:background="@color/primary_dark"
             android:paddingStart="8dp"
             android:paddingTop="8dp"
-            android:paddingEnd="8dp"
+            android:paddingEnd="40dp"
             android:paddingBottom="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/primary_light"
@@ -32,6 +32,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="г. Нур-Султан, ул. Сейфуллина 22" />
+
+        <ImageView
+            android:id="@+id/ivLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:src="@drawable/ic_location_on_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvAddress" />
 
         <TextView
             android:id="@+id/tvBranch"
